@@ -126,18 +126,177 @@
            padding-bottom: 10px; /* Add spacing below the title */
            font-size: 1.5rem; /* Slightly larger title font */
         }
+        .box-container {
+         display: flex;
+         justify-content: space-between; /* Space between boxes */
+         width: 100%; /* Full width */
+         gap: 10px; /* Space between boxes */
+        }
+
+         /* Styling for each box */
+        .text-image-box {
+         flex: 6; /* Make both boxes take up equal width */
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         border: 2px solid #ccc;
+         padding: 10px;
+         box-sizing: border-box;
+         min-height: 25vh; /* Ensure height consistency */
+        }
+
+         /* Styling for the number box */
+        .number-box {
+          flex: 1;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 2rem; /* Make the number large */
+         font-weight: bold;
+         background-color: #00274d; /* Dark blue background */
+         color: white; /* White text */
+         width: 100%; /* Full width inside its flex space */
+         text-align: center;
+        }
+
+         /* Styling for the image */
+        .text-image-box img {
+         max-height: 100%;
+         width: auto;
+         margin-left: 20px;
+        }
+         /* Flex container for all rows of boxes */
+        .box-wrapper {
+          display: flex;
+          flex-direction: column; /* Stack rows vertically */
+          align-items: center; /* Center everything */
+          width: 100%;
+        }
+
+          /* Flex container for a row */
+        .box-container {
+          display: flex;
+          justify-content: space-between; /* Space between boxes */
+          width: 100%; /* Full width */
+          gap: 10px; /* Space between boxes */
+          margin-bottom: 10px; /* Space between rows */
+        }
+
+          /* Styling for each box */
+        .text-image-box {
+         flex: 6; /* Takes up 6/7 of the total space */
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         border: 2px solid #ccc;
+         padding: 10px;
+         box-sizing: border-box;
+         min-height: 25vh; /* Ensure height consistency */
+        }
+
+         /* Styling for the number box */
+        .number-box {
+         flex: 1; /* Takes up 1/7 of the total space */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 2rem; /* Large number */
+         font-weight: bold;
+         background-color: #00274d; /* Dark blue */
+         color: white;
+         text-align: center;
+        }
+
+         /* Styling for the image */
+        .text-image-box img {
+         max-height: 100%;
+         width: auto;
+         margin-left: 20px;
+        }
+
+         /* Button container */
+        .button-container {
+         text-align: center;
+         width: 100%;
+         margin-top: 10px;
+        }
+
+         /* Add Button */
+        .add-button {
+         background-color: #004080;
+         color: white;
+         font-size: 1.2rem;
+         padding: 10px 20px;
+         border: none;
+         cursor: pointer;
+         border-radius: 5px;
+         transition: background-color 0.3s ease-in-out;
+        }
+
+        .add-button:hover {
+         background-color: #00274d;
+        }
 
             
-    </style>  
-          <div class="text-image-box">
-             <div class="text-content">
+    </style>          
+         
+
+                       
+
+         <div class="box-wrapper">
+          <!-- First Row -->
+          <div class="box-container" id="box-area">
+            <!-- Number box (1/7 of width) -->
+            <div class="text-image-box number-box">1</div>
+            <!-- Existing box (6/7 of width) -->
+            <div class="text-image-box">
+              <div class="text-content">
                 <h2>Box Title</h2>
                 <p>This is a rectangular box where you can fill in some text alongside an image. The text starts at the top-left corner, and the image is on the right.</p>
-             </div>
-               <img src="https://poolrescue.com.br/wp-content/uploads/2016/10/como-saber-se-a-agua-da-piscina-esta-propria-para-o-uso.jpeg" alt="">
+              </div>
+              <img src="https://poolrescue.com.br/wp-content/uploads/2016/10/como-saber-se-a-agua-da-piscina-esta-propria-para-o-uso.jpeg" alt="Pool Water Check">
+            </div>
           </div>
+          <!-- Button that stays at the bottom -->
+          <div class="button-container">
+            <button class="add-button" onclick="addNewRow()">Add Box</button>
+          </div>
+        </div>
 
+<script>
+  let currentNumber = 1; // Track the latest number
 
+  function addNewRow() {
+      currentNumber++; // Increment the number for the new box
+
+      // Create the new row container
+      const newRow = document.createElement("div");
+      newRow.classList.add("box-container");
+
+      // Create the number box
+      const numberBox = document.createElement("div");
+      numberBox.classList.add("text-image-box", "number-box");
+      numberBox.textContent = currentNumber; // Set the incremented number
+
+      // Create the text-image box
+      const textImageBox = document.createElement("div");
+      textImageBox.classList.add("text-image-box");
+      textImageBox.innerHTML = `
+          <div class="text-content">
+              <h2>Box Title</h2>
+              <p>This is a rectangular box where you can fill in some text alongside an image. The text starts at the top-left corner, and the image is on the right.</p>
+          </div>
+          <img src="https://poolrescue.com.br/wp-content/uploads/2016/10/como-saber-se-a-agua-da-piscina-esta-propria-para-o-uso.jpeg" alt="Pool Water Check">
+      `;
+
+      // Append boxes to the new row
+      newRow.appendChild(numberBox);
+      newRow.appendChild(textImageBox);
+
+      // Add new row before the button container
+      document.querySelector(".box-wrapper").insertBefore(newRow, document.querySelector(".button-container"));
+  }
+</script>
            
         
 
